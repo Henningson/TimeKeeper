@@ -16,10 +16,10 @@ class TimeKeeper:
         self.returning_time = returning_time
 
     def check_time(self):
-        return self.get_current_time() >= self.stopping_time
+        return self.stopping_time <= self.get_current_time() <= self.returning_time
 
     def wait(self):
-        if self.get_current_time() >= self.stopping_time:
+        if self.check_time():
             print("Stopping time exceeded. Stopping until " + str(self.returning_time))
             timedelta = datetime.datetime.combine(datetime.date.min, self.returning_time) - datetime.datetime.combine(datetime.date.min, self.get_current_time())
             print("Sleeping for " + str(timedelta.total_seconds()))
